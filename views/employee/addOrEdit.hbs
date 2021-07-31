@@ -1,0 +1,87 @@
+
+
+<h3>{{viewTitle}}</h3>
+<body>
+<form action="/employee/list" method="GET" class="form-inline" autocomplete="off">
+        <div class="form-group">
+           
+            <input type="text" name="search" placeholder="Search Vnn Here" > 
+            <input type="submit" value="Search" class="btn btn-default"> 
+
+        </div>
+</form>
+    <br>
+
+    <form action="/employee/allsearch" method="GET" class="form-inline" autocomplete="off">
+        <div class="form-group">
+           
+            <input type="text" name="search" placeholder="Search " > 
+            <input type="submit" value="Search" class="btn btn-default"> 
+
+        </div>
+</form>
+
+<br>
+
+<form action="/employee" method="POST" autocomplete="off">
+    <input type="hidden" name="_id" value="{{employee._id}}">
+
+    <div class="form-group">
+        <label>Customer Name</label>
+        <input type="text" class="form-control" name="cname" placeholder="Customer Name" value="{{employee.cname}}">
+    <br>
+
+    <div class="form-group">
+        <label >Driver Name</label>
+        <input type="text" class="form-control" name="fullName" placeholder="Driver Name" value="{{employee.fullName}}">
+        <div class="text-danger">
+            {{employee.fullNameError}}</div>
+    </div>
+    <div class="form-group">
+        <label>Vnn</label>
+        <input type="text" class="form-control" name="vnn" placeholder="Vnn" value="{{employee.vnn}}">
+        <div class="text-danger">
+            {{employee.vnn}}</div>
+    </div>
+    <br>
+
+
+    <div class="form-group">
+        <label>Office Name</label>
+        <input type="text" class="form-control" name="oname" placeholder="Office Name" value="{{employee.oname}}">
+    <br>
+    <div class="form-group">
+        <label>Licence Plate</label>
+        <input type="text" class="form-control" name="lp" placeholder="Licence Plate" value="{{employee.lp}}">
+    <br>
+
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Latitude</label>
+            <input type="text" class="form-control" name="latitude" placeholder="Latitude" value="{{employee.latitude}}">
+        </div>
+        <div class="form-group col-md-6">
+            <label>Longitude</label>
+            <input type="text" class="form-control" name="longitude" placeholder="Longitude" value="{{employee.longitude}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+        <a class="btn btn-secondary" href="/employee/fulllist"><i class="fa fa-list-alt"></i> View All</a>
+
+        <br><br>
+        <a class="btn btn-secondary" href="/employee/new"> Google Maps</a>
+        {{!-- <a class="btn btn-secondary" href="/employee/index.html"> html Google Maps</a> --}}
+    </div>
+</form>
+</body>
+
+<style>
+    body{
+        width:100%;
+        margin-left: -30px;
+    }
+    
+    
+</style>

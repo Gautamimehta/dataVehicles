@@ -1,0 +1,77 @@
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+
+<h3>Google Maps</h3>
+<div id="mapid"></div>
+<!-- style starts -->
+<style>
+  #mapid {
+    height: 580px;
+    width: 738px;
+  }
+
+  .leaflet-popup-content-wrapper {
+    border-radius: 0;
+    background: black;
+    color: white;
+    font-size: 20px;
+  }
+
+  .leaflet-popup-content {
+    background-color: grey;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 8px;
+    border-color: black;
+  }
+
+  .leaflet-popup-tip {
+    background-color: black;
+  }
+
+  .leaflet-popup-close-button {
+    display: none;
+  }
+</style>
+<!-- style ends -->
+
+
+
+<!-- js part starts -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+<script>
+  const mymap = L.map('mapid').setView([0, 0], 1);
+
+  const attribution =
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+  const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+  const tiles = L.tileLayer(tileUrl, {
+    attribution
+  });
+
+  tiles.addTo(mymap);
+
+  fetch('employees.json').then(function(response) {
+    return response.json();
+  }).then(function(obj) {
+    console.log(obj.employees);
+    const html = obj.employees
+      .map(user => {
+        const lan = `${user.latitude}`;
+        const lon = `${user.longitude}`;
+        var popupContent = "Latitude: " + `${user.latitude}` + " Longitude: " + `${user.longitude}` + "<br>" + " Driver Name: " + `${user.fullName}`;
+        L.marker([lan, lon]).addTo(mymap).bindPopup(popupContent);
+      }).join("");
+
+    console.log(html);
+  }).catch(function(error) {
+    console.log("error");
+    console.log(error);
+  });
+</script>
+<!-- js ends -->
